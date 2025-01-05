@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "caddix:build:production"
+              "buildTarget": "caddix:build:production"
             },
             "development": {
-              "browserTarget": "caddix:build:development"
+              "buildTarget": "caddix:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "caddix:build"
+            "buildTarget": "caddix:build"
           }
         },
         "test": {
