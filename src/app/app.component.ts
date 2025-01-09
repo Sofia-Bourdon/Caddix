@@ -35,6 +35,29 @@ export class AppComponent implements OnInit {
     }
   }
 
+  addItems(listId: string, newItem: string) {
+    if (newItem.trim()) { // Ensure the input is not empty
+      this.service.addItem(listId, newItem).then(() => {
+        console.log(`Item "${newItem}" added to list ${listId}`);
+        this.refreshLists(); // Refresh all lists and their items
+      });
+    } else {
+      console.error('Item name cannot be empty');
+    }
+  }
+
+  editItem(listId: string, itemId: string, newName: string) {
+    if (newName.trim()) {
+      this.service.editItem(listId, itemId, { name: newName.trim() }).then(() => {
+        console.log(`Item ${itemId} updated successfully`);
+        this.refreshLists(); // Refresh the data to show updated name
+      }).catch((err) => {
+        console.error('Error updating item:', err);
+      });
+    } else {
+      console.error('Item name cannot be empty');
+    }
+  }
 
   deleteItems(listId: string, itemId: string) {
     this.service.deleteItem(listId, itemId).then(() => {

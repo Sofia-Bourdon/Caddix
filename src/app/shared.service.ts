@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc} from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, updateDoc} from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -18,9 +18,21 @@ export class SharedService {
     const listsCollection = collection(this.fs,'lists');
     return collectionData(listsCollection, { idField: 'id' });
   }
+  
+  addItem(listId: string, name: string) {
+    const data = { name: name };
+    const itemsCollection = collection(this.fs,`lists/${listId}/items`);
+    return addDoc(itemsCollection, data);
+  }
 
   deleteItem(listId: string, itemId: string) {
     const docRef = doc(this.fs,`lists/${listId}/items/${itemId}`);
     return deleteDoc(docRef);
   }
+
+  editItem(listId: string, itemId: string, updatedData: { name: string }) {
+    const docRef = doc(this.fs, `lists/${listId}/items/${itemId}`);
+    return updateDoc(docRef, updatedData);
+  }
+  
 }

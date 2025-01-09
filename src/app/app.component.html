@@ -1,14 +1,23 @@
 <div class="div">
-  <h2>Caddix</h2>
+  <h2 style="margin: 10px">Caddix</h2>
 
-  <div *ngFor="let list of lists">
+  <div style="margin: 30px;" *ngFor="let list of lists">
     <h3>{{ list.name }}</h3>
     <p>{{ list.description }}</p>
-    <ul>
-      <li *ngFor="let item of list.items">
-        <b>{{ item.name }}</b>
-        <button (click)="deleteItems(list.id, item.id)">Delete</button>
-      </li>
-    </ul>
+
+    <div style="margin-bottom: 20px;" class="div">
+      <input #newItem placeholder="New item name" />
+      <button (click)="addItems(list.id, newItem.value); newItem.value=''">Add new Item</button>
+  
+    </div>
+
+      <div *ngFor="let item of list.items">
+        <div style="margin-top: 15px;">
+          <b>{{ item.name }}</b>
+          <input #editInput placeholder="Edit item name" />
+          <button (click)="editItem(list.id, item.id, editInput.value)">Edit</button>
+          <button (click)="deleteItems(list.id, item.id)">Delete</button>
+        </div>
+      </div>
   </div>
 </div>
