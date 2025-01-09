@@ -6,6 +6,9 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { AppComponent } from '../app/app.component';
 import { SharedService } from './shared.service';
+import {MatListModule} from '@angular/material/list';
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyB4p1b2bvokz1SYylSikb983-DetWp3Bns",
@@ -21,6 +24,7 @@ const firebaseConfig = {
   declarations: [AppComponent],
   imports: [ 
     BrowserModule,
+    MatListModule,
   ],
   providers: [SharedService,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),

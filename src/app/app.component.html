@@ -1,5 +1,14 @@
-<h2>Caddix</h2>
+<div class="div">
+  <h2>Caddix</h2>
 
-<h3 *ngFor="let item of items">
-  <b>{{item.name}}</b>
-</h3>
+  <div *ngFor="let list of lists">
+    <h3>{{ list.name }}</h3>
+    <p>{{ list.description }}</p>
+    <ul>
+      <li *ngFor="let item of list.items">
+        <b>{{ item.name }}</b>
+        <button (click)="deleteItems(list.id, item.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
