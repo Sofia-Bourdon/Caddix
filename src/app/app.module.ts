@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+
 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
-import { AppComponent } from '../app/app.component';
+import { ListComponent } from './list.component';
+import { ListDetailComponent } from './list-detail/list-detail.component'
 import { SharedService } from './shared.service';
 import {MatListModule} from '@angular/material/list';
 
@@ -20,16 +23,25 @@ const firebaseConfig = {
   measurementId: "G-LTSE0GR30P"
 };
 
+const routes: Routes = [
+  { path: '', component: ListComponent }, // Root route
+  { path: 'list/:id', component: ListDetailComponent }, // Detail route
+];
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+  ListComponent,
+  ListDetailComponent,
+  ],
   imports: [ 
     BrowserModule,
     MatListModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [SharedService,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ ListComponent ]
 })
 export class AppModule { }

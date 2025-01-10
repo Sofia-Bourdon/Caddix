@@ -1,0 +1,22 @@
+<div>
+  <h2>{{ list.name }}</h2>
+  <p>{{ list.description }}</p>
+
+  <h3>Items:</h3>
+
+  <!-- Add Item -->
+  <div style="margin-bottom: 20px;" class="div">
+    <input #newItem placeholder="New item name" />
+    <button (click)="addItems(newItem.value); newItem.value=''">Add new Item</button>
+  </div>
+
+  <!-- Display and manage items -->
+  <div *ngFor="let item of items">
+    <div style="margin-top: 15px;">
+      <b>{{ item.name }}</b>
+      <input #editInput placeholder="Edit item name" />
+      <button (click)="editItem(item.id, editInput.value)">Edit</button>
+      <button (click)="deleteItem(item.id)">Delete</button>
+    </div>
+  </div>
+</div>

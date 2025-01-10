@@ -1,0 +1,38 @@
+
+  <!-- <p>{{ list.description }}</p> -->
+
+  <!-- Add and manage items -->
+  <!-- <div style="margin-bottom: 20px;" class="div">
+    <input #newItem placeholder="New item name" />
+    <button (click)="addItems(list.id, newItem.value); newItem.value=''">Add new Item</button>
+  </div>
+
+  <div *ngFor="let item of list.items">
+    <div style="margin-top: 15px;">
+      <b>{{ item.name }}</b>
+      <input #editInput placeholder="Edit item name" />
+      <button (click)="editItem(list.id, item.id, editInput.value)">Edit</button>
+      <button (click)="deleteItems(list.id, item.id)">Delete</button>
+    </div>
+  </div> -->
+  <div class="div">
+    <!-- Only display the title when not in detail view -->
+    <h2 style="margin: 10px" *ngIf="!isDetailView">Caddix</h2>
+  
+    <!-- Render the list only if not in detail view -->
+    <div *ngIf="!isDetailView">
+      <div style="margin: 30px;" *ngFor="let list of lists">
+        <h3>
+          <!-- Link to the detail page -->
+          <a [routerLink]="['/list', list.id]" style="cursor: pointer; color: blue; text-decoration: underline;">
+            {{ list.name }}
+          </a>
+        </h3>
+      </div>
+    </div>
+  
+    <!-- Router Outlet for dynamic content -->
+    <router-outlet></router-outlet>
+  </div>
+  
+  

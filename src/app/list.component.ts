@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { SharedService } from './shared.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss'],
 })
-export class AppComponent implements OnInit {
-  title = 'caddix';
+export class ListComponent implements OnInit {
   lists: any[] = [];
   items: any[] = [];
   selectedListId: string | null = null;
+  isDetailView: boolean = false; // To track if we're on the detail route
 
-  constructor(private service: SharedService) {}
+  constructor(private service: SharedService, private router: Router, private route: ActivatedRoute) {}
 
   refreshLists() {
     this.service.getLists().subscribe((lists) => {
@@ -36,10 +37,10 @@ export class AppComponent implements OnInit {
   }
 
   addItems(listId: string, newItem: string) {
-    if (newItem.trim()) { // Ensure the input is not empty
+    if (newItem.trim()) {
       this.service.addItem(listId, newItem).then(() => {
         console.log(`Item "${newItem}" added to list ${listId}`);
-        this.refreshLists(); // Refresh all lists and their items
+        this.refreshLists();
       });
     } else {
       console.error('Item name cannot be empty');
@@ -50,7 +51,7 @@ export class AppComponent implements OnInit {
     if (newName.trim()) {
       this.service.editItem(listId, itemId, { name: newName.trim() }).then(() => {
         console.log(`Item ${itemId} updated successfully`);
-        this.refreshLists(); // Refresh the data to show updated name
+        this.refreshLists();
       }).catch((err) => {
         console.error('Error updating item:', err);
       });
@@ -68,5 +69,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.refreshLists();
+
+    // Detect if we are on the detail view
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isDetailView = this.route.firstChild !== null;
+      }
+    });
   }
 }
