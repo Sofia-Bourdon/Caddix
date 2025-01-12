@@ -128,6 +128,15 @@ export class ListComponent implements OnInit {
       console.error('Error deleting list:', err);
     });
   }
+
+  shareList(listId: string): void {
+    const shareUrl = `${window.location.origin}/list/${listId}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      alert('List URL copied to clipboard! Share it with your friend.');
+    }).catch(err => {
+      console.error('Could not copy URL: ', err);
+    });
+  }  
   
 
   editItem(listId: string, itemId: string, newName: string): void {

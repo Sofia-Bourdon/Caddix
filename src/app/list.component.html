@@ -1,6 +1,6 @@
 <div class="main-div">
   <!-- Only display the title when not in detail view -->
-  <h2 class="page-title" *ngIf="!isDetailView">Caddix<hr></h2>
+  <h2 class="page-title" *ngIf="!isDetailView"><mat-icon style="padding-right: 5px;">shopping_cart</mat-icon>Caddix<hr></h2>
 
   <div class="add-list-button" *ngIf="!showForm && !isDetailView">
     <button mat-fab extended (click)="toggleForm()">
@@ -40,12 +40,15 @@
             <mat-card-title>
               <div class="card-header">
                 <span>{{ list.name }}</span>
+                <button mat-icon-button (click)="shareList(list.id)">
+                  <mat-icon>share</mat-icon>
+                </button>
                 <button mat-icon-button (click)="deleteList(list.id)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
             </mat-card-title>
-            <mat-card-content>{{ list.description }}</mat-card-content>
+            <mat-card-content style="font-size: large;">{{ list.description }}</mat-card-content>
           </a>
         </mat-card>
       </mat-grid-tile>
