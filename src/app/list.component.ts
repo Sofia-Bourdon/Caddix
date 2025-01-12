@@ -47,6 +47,19 @@ export class ListComponent implements OnInit {
     }
   }
 
+  addList(name: string, description: string) {
+    if (name.trim() && description.trim()) {
+      this.service.addList(name, description).then(() => {
+        console.log(`List "${name}" added successfully`);
+        this.refreshLists(); // Refresh the lists after adding a new one
+      }).catch((err) => {
+        console.error('Error adding list:', err);
+      });
+    } else {
+      console.error('List name and description cannot be empty');
+    }
+  }  
+
   editItem(listId: string, itemId: string, newName: string) {
     if (newName.trim()) {
       this.service.editItem(listId, itemId, { name: newName.trim() }).then(() => {

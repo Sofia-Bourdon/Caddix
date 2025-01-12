@@ -1,21 +1,44 @@
-<div class="div">
+<div class="main-div">
   <!-- Only display the title when not in detail view -->
   <h2 class="page-title" *ngIf="!isDetailView">Caddix</h2>
+  
 
-  <!-- Render the list only if not in detail view -->
+  <!-- Add New List Form -->
+  <div class="add-list-container" *ngIf="!isDetailView">
+    <h3>Add New List</h3>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>List Name</mat-label>
+        <input matInput #listName placeholder="Enter list name" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>List Description</mat-label>
+        <textarea matInput #listDescription placeholder="Enter list description"></textarea>
+      </mat-form-field>
+
+      <button 
+        mat-raised-button 
+        color="primary"
+        (click)="addList(listName.value, listDescription.value); listName.value=''; listDescription.value='';"
+      >
+        Add List
+      </button>
+    </form>
+  </div>
+
+  <!-- Render the lists -->
   <div *ngIf="!isDetailView" class="list-container">
-    <div class="list-container">
-      <mat-grid-list cols="3" rowHeight="200px" gutterSize="20px">
-        <mat-grid-tile *ngFor="let list of lists">
-          <mat-card class="list-card">
-            <a [routerLink]="['/list', list.id]" class="list-link">
-              <mat-card-title>{{ list.name }}</mat-card-title>
-              <mat-card-content style="font-size: large;">{{ list.description }}</mat-card-content>
-            </a>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
+    <mat-grid-list cols="3" rowHeight="200px" gutterSize="20px">
+      <mat-grid-tile *ngFor="let list of lists">
+        <mat-card class="list-card">
+          <a [routerLink]="['/list', list.id]" class="list-link">
+            <mat-card-title>{{ list.name }}</mat-card-title>
+            <mat-card-content>{{ list.description }}</mat-card-content>
+          </a>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
   </div>
 
   <!-- Router Outlet for dynamic content -->

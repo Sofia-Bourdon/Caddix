@@ -18,6 +18,12 @@ export class SharedService {
     const listsCollection = collection(this.fs,'lists');
     return collectionData(listsCollection, { idField: 'id' });
   }
+
+  addList(name: string, description: string) {
+    const data = { name, description, createdAt: new Date().toISOString() };
+    const listsCollection = collection(this.fs, 'lists');
+    return addDoc(listsCollection, data);
+  }
   
   addItem(listId: string, name: string) {
     const data = { name: name };

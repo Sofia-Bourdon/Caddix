@@ -17,7 +17,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -53,6 +54,8 @@ const routes: Routes = [
     MatListModule,
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [SharedService,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),

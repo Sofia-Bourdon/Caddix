@@ -8,31 +8,28 @@
   <!-- Add Item -->
   <div style="margin-bottom: 20px;" class="div">
     <input #newItem placeholder="New item name" />
-    <button class="example-button-container" mat-fab extended (click)="addItems(newItem.value); newItem.value=''">
+    <button  class="example-button-container" mat-fab extended (click)="addItems(newItem.value); newItem.value=''">
       Add
       +
     </button>
   </div>
 
+
   <div *ngFor="let item of items">
     <mat-selection-list>
       <mat-list-option>
-        <!-- Display item name if not editing -->
-        <b *ngIf="!item.isEditing">{{ item.name }}</b>
+        <b class="input-box" *ngIf="!item.isEditing">{{ item.name }}</b>
         
-        <!-- Show the input box if editing -->
-        <input 
+        <input class="input-box"
           *ngIf="item.isEditing" 
           [(ngModel)]="item.name" 
           placeholder="Edit item name" 
         />
         
-        <!-- Button to toggle Edit/Save -->
         <button (click)="toggleEditMode(item)">
           {{ item.isEditing ? 'Save' : 'Edit' }}
         </button>
   
-        <!-- Button to delete the item -->
         <button (click)="deleteItem(item.id)">Delete</button>
       </mat-list-option>
     </mat-selection-list>
