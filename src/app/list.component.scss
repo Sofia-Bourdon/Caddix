@@ -15,16 +15,41 @@
     padding: 20px;
   }
   
+  
   mat-grid-list {
     width: 100%;
   }
   
   mat-grid-tile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    flex: 1;
   }
+  
+  @media (max-width: 600px) {
+    mat-grid-list {
+      cols: 1;
+    }
+    .list-container {
+      padding: 0px;
+    }
+    mat-grid-tile-content {
+      flex: 1;
+      margin: 0%;
+    }
+  }
+  
+  @media (max-width: 960px) {
+    mat-grid-list {
+      cols: 2;
+    }
+  }
+  
+  @media (min-width: 961px) {
+    mat-grid-list {
+      cols: 3;
+    }
+  }
+  
+  
   
   .list-card {
     width: 80%;
@@ -64,5 +89,9 @@
   .example-full-width {
     width: 100%;
   }
+
+
+  
+  
 
 

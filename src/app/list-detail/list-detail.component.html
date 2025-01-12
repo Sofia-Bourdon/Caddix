@@ -1,40 +1,45 @@
-<div>
-  <h2 class="page-title">Caddix</h2>
-  <h2>{{ list.name }}</h2>
-  <p style="font-size:larger">{{ list.description }}</p>
+<div style="max-width: 1200px; margin: 0 auto;">
+  <a [routerLink]="['/']" class="home-link">
+    <h2 class="page-title">Caddix</h2>
+  </a>
 
-  <h3>Items:</h3>
-
-  <!-- Add Item -->
-  <div style="margin-bottom: 20px;" class="div">
-    <input #newItem placeholder="New item name" />
-    <button  class="example-button-container" mat-fab extended (click)="addItems(newItem.value); newItem.value=''">
-      Add
-      +
-    </button>
-  </div>
-
-
-  <div *ngFor="let item of items">
-    <mat-selection-list>
-      <mat-list-option>
-        <b class="input-box" *ngIf="!item.isEditing">{{ item.name }}</b>
-        
-        <input class="input-box"
-          *ngIf="item.isEditing" 
-          [(ngModel)]="item.name" 
-          placeholder="Edit item name" 
-        />
-        
-        <button (click)="toggleEditMode(item)">
-          {{ item.isEditing ? 'Save' : 'Edit' }}
-        </button>
+  <div style="padding: 20px;">
+    <h2>{{ list.name }}</h2>
+    <p style="font-size:larger">{{ list.description }}</p>
   
-        <button (click)="deleteItem(item.id)">Delete</button>
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+    <h3>Items:</h3>
   
+    <!-- Add Item -->
+    <div style="margin-bottom: 20px;" class="div">
+      <input #newItem placeholder="New item name" />
+      <button  class="add-items-button" mat-fab extended (click)="addItems(newItem.value); newItem.value=''">
+        Add
+        +
+      </button>
+    </div>
+  
+  
+    <div *ngFor="let item of items">
+      <mat-selection-list>
+        <mat-list-option>
+          <b class="input-box" *ngIf="!item.isEditing">{{ item.name }}</b>
+          
+          <input class="input-box"
+            *ngIf="item.isEditing" 
+            [(ngModel)]="item.name" 
+            placeholder="Edit item name" 
+          />
+          
+          <button (click)="toggleEditMode(item)">
+            {{ item.isEditing ? 'Save' : 'Edit' }}
+          </button>
+    
+          <button (click)="deleteItem(item.id)">Delete</button>
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </div>
+</div>
   
   
   

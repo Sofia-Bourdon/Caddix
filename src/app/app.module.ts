@@ -19,6 +19,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { LayoutModule } from '@angular/cdk/layout';
+
 
 
 
@@ -34,8 +36,8 @@ const firebaseConfig = {
 };
 
 const routes: Routes = [
-  { path: '', component: ListComponent }, // Root route
-  { path: 'list/:id', component: ListDetailComponent }, // Detail route
+  { path: '', component: ListComponent },
+  { path: 'list/:id', component: ListDetailComponent },
 ];
 
 @NgModule({
@@ -55,7 +57,8 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    LayoutModule
   ],
   providers: [SharedService,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),

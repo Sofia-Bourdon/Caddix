@@ -1,8 +1,17 @@
 @use '@angular/material' as mat;
 
-.example-button-container {
-    width: 100px;
+.home-link {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
   }
+}
+
+.add-items-button{
+  width: 100px;
+}
 
   .page-title {
     font-size: 32px;
