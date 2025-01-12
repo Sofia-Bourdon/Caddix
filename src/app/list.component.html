@@ -1,10 +1,16 @@
 <div class="main-div">
   <!-- Only display the title when not in detail view -->
-  <h2 class="page-title" *ngIf="!isDetailView">Caddix</h2>
-  
+  <h2 class="page-title" *ngIf="!isDetailView">Caddix<hr></h2>
+
+  <div class="add-list-button" *ngIf="!showForm && !isDetailView">
+    <button mat-fab extended (click)="toggleForm()">
+      <mat-icon>add</mat-icon>
+      Add New List
+    </button>
+  </div>
 
   <!-- Add New List Form -->
-  <div class="add-list-container" *ngIf="!isDetailView">
+  <div class="add-list-container" *ngIf="showForm && !isDetailView">
     <h3>Add New List</h3>
     <form class="example-form">
       <mat-form-field class="example-full-width">
@@ -17,17 +23,15 @@
         <textarea matInput #listDescription placeholder="Enter list description"></textarea>
       </mat-form-field>
 
-      <button 
-        mat-raised-button 
-        color="primary"
-        (click)="addList(listName.value, listDescription.value); listName.value=''; listDescription.value='';"
-      >
-        Add List
-      </button>
+      <div class="form-actions">
+        <button mat-raised-button color="primary"(click)="addList(listName.value, listDescription.value); listName.value=''; listDescription.value=''; toggleForm()">
+          Save
+        </button>
+        <button mat-raised-button (click)="toggleForm()">Cancel</button>
+      </div>
     </form>
   </div>
 
-  <!-- Render the lists -->
   <div *ngIf="!isDetailView" class="list-container">
     <mat-grid-list [cols]="cols" rowHeight="200px">
       <mat-grid-tile *ngFor="let list of lists">
@@ -36,7 +40,9 @@
             <mat-card-title>
               <div class="card-header">
                 <span>{{ list.name }}</span>
-                <button (click)="deleteList(list.id)">Delete</button>
+                <button mat-icon-button (click)="deleteList(list.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
             </mat-card-title>
             <mat-card-content>{{ list.description }}</mat-card-content>
@@ -44,9 +50,7 @@
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
-    
   </div>
 
-  <!-- Router Outlet for dynamic content -->
   <router-outlet></router-outlet>
 </div>

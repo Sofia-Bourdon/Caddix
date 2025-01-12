@@ -2,22 +2,33 @@
   <a [routerLink]="['/']" class="home-link">
     <h2 class="page-title">Caddix</h2>
   </a>
+  
+  <hr>
+
+  <a [routerLink]="['/']" class="home-link">
+    <button mat-icon-button>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </a>
+  
 
   <div style="padding: 20px;">
     <h2>{{ list.name }}</h2>
     <p style="font-size:larger">{{ list.description }}</p>
-  
-    <h3>Items:</h3>
-  
-    <!-- Add Item -->
-    <div style="margin-bottom: 20px;" class="div">
-      <input #newItem placeholder="New item name" />
-      <button  class="add-items-button" mat-fab extended (click)="addItems(newItem.value); newItem.value=''">
+    
+    <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 20px;">
+      <input 
+        #newItem 
+        placeholder="New item name" 
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex: 1;" 
+      />
+      <button class="add-items-button" mat-fab extended (click)="addItems(newItem.value); newItem.value=''">
+        <mat-icon>add</mat-icon>
         Add
-        +
       </button>
     </div>
-  
+
+    <h3>Items:</h3>
   
     <div *ngFor="let item of items">
       <mat-selection-list>
@@ -30,11 +41,14 @@
             placeholder="Edit item name" 
           />
           
-          <button (click)="toggleEditMode(item)">
-            {{ item.isEditing ? 'Save' : 'Edit' }}
+          <button mat-icon-button (click)="toggleEditMode(item)">
+          <mat-icon>{{ item.isEditing ? 'check' : 'edit' }}</mat-icon>
           </button>
+
     
-          <button (click)="deleteItem(item.id)">Delete</button>
+          <button mat-icon-button (click)="deleteItem(item.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </mat-list-option>
       </mat-selection-list>
     </div>

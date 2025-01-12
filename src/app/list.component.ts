@@ -13,8 +13,9 @@ export class ListComponent implements OnInit {
   items: any[] = [];
   selectedListId: string | null = null;
   isDetailView: boolean = false;
+  showForm: boolean = false;
 
-  cols: number = 3; // Default column count for large screens
+  cols: number = 3;
   showContainerInHandset: boolean = false;
   showContainerInTablet: boolean = false;
 
@@ -51,6 +52,10 @@ export class ListComponent implements OnInit {
           console.log('Screen matches HandsetLandscape');
         }
       });
+  }
+
+  toggleForm(): void {
+    this.showForm = !this.showForm;
   }
 
   @HostListener('window:resize', ['$event'])
