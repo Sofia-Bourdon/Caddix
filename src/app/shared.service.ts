@@ -24,6 +24,11 @@ export class SharedService {
     const listsCollection = collection(this.fs, 'lists');
     return addDoc(listsCollection, data);
   }
+
+  deleteList(listId: string) {
+    const docRef = doc(this.fs, `lists/${listId}`);
+    return deleteDoc(docRef);
+  }  
   
   addItem(listId: string, name: string) {
     const data = { name: name };

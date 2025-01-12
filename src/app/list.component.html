@@ -33,7 +33,12 @@
       <mat-grid-tile *ngFor="let list of lists">
         <mat-card class="list-card">
           <a [routerLink]="['/list', list.id]" class="list-link">
-            <mat-card-title>{{ list.name }}</mat-card-title>
+            <mat-card-title>
+              <div class="card-header">
+                <span>{{ list.name }}</span>
+                <button (click)="deleteList(list.id)">Delete</button>
+              </div>
+            </mat-card-title>
             <mat-card-content>{{ list.description }}</mat-card-content>
           </a>
         </mat-card>

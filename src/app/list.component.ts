@@ -29,14 +29,12 @@ export class ListComponent implements OnInit {
     this.refreshLists();
     this.updateColumns();
 
-    // Detect if we are on the detail view
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isDetailView = this.route.firstChild !== null;
       }
     });
 
-    // Observe breakpoints for responsiveness
     this.breakpointObserver
       .observe([Breakpoints.TabletPortrait, Breakpoints.HandsetLandscape])
       .subscribe((state) => {
@@ -64,11 +62,11 @@ export class ListComponent implements OnInit {
     const width = window.innerWidth;
 
     if (width <= 600) {
-      this.cols = 1; // Small screens
+      this.cols = 1;
     } else if (width <= 960) {
-      this.cols = 2; // Medium screens
+      this.cols = 2;
     } else {
-      this.cols = 3; // Large screens
+      this.cols = 3;
     }
   }
 
@@ -77,7 +75,7 @@ export class ListComponent implements OnInit {
       this.lists = lists;
       this.lists.forEach((list) => {
         this.service.getItems(list.id).subscribe((items) => {
-          list.items = items; // Attach items to their respective lists
+          list.items = items;
         });
       });
     });
@@ -116,6 +114,16 @@ export class ListComponent implements OnInit {
       console.error('List name and description cannot be empty');
     }
   }
+
+  deleteList(listId: string): void {
+    this.service.deleteList(listId).then(() => {
+      console.log(`List with ID ${listId} deleted successfully`);
+      this.refreshLists();
+    }).catch((err) => {
+      console.error('Error deleting list:', err);
+    });
+  }
+  
 
   editItem(listId: string, itemId: string, newName: string): void {
     if (newName.trim()) {
