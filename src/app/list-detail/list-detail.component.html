@@ -1,22 +1,43 @@
 <div>
+  <h2 class="page-title">Caddix</h2>
   <h2>{{ list.name }}</h2>
-  <p>{{ list.description }}</p>
+  <p style="font-size:larger">{{ list.description }}</p>
 
   <h3>Items:</h3>
 
   <!-- Add Item -->
   <div style="margin-bottom: 20px;" class="div">
     <input #newItem placeholder="New item name" />
-    <button (click)="addItems(newItem.value); newItem.value=''">Add new Item</button>
+    <button class="example-button-container" mat-fab extended (click)="addItems(newItem.value); newItem.value=''">
+      Add
+      +
+    </button>
   </div>
 
-  <!-- Display and manage items -->
   <div *ngFor="let item of items">
-    <div style="margin-top: 15px;">
-      <b>{{ item.name }}</b>
-      <input #editInput placeholder="Edit item name" />
-      <button (click)="editItem(item.id, editInput.value)">Edit</button>
-      <button (click)="deleteItem(item.id)">Delete</button>
-    </div>
+    <mat-selection-list>
+      <mat-list-option>
+        <!-- Display item name if not editing -->
+        <b *ngIf="!item.isEditing">{{ item.name }}</b>
+        
+        <!-- Show the input box if editing -->
+        <input 
+          *ngIf="item.isEditing" 
+          [(ngModel)]="item.name" 
+          placeholder="Edit item name" 
+        />
+        
+        <!-- Button to toggle Edit/Save -->
+        <button (click)="toggleEditMode(item)">
+          {{ item.isEditing ? 'Save' : 'Edit' }}
+        </button>
+  
+        <!-- Button to delete the item -->
+        <button (click)="deleteItem(item.id)">Delete</button>
+      </mat-list-option>
+    </mat-selection-list>
   </div>
-</div>
+  
+  
+  
+  

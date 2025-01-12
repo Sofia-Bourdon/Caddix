@@ -74,4 +74,15 @@ export class ListDetailComponent implements OnInit {
       });
     }
   }
+
+  toggleEditMode(item: any) {
+    if (item.isEditing) {
+      // If in editing mode, save the changes
+      this.editItem(item.id, item.name);
+    }
+    // Toggle the editing state
+    item.isEditing = !item.isEditing;
+  }
+  
+
 }

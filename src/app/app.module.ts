@@ -10,6 +10,15 @@ import { ListComponent } from './list.component';
 import { ListDetailComponent } from './list-detail/list-detail.component'
 import { SharedService } from './shared.service';
 import {MatListModule} from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+
+
 
 
 
@@ -35,8 +44,15 @@ const routes: Routes = [
   ],
   imports: [ 
     BrowserModule,
-    MatListModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatCardModule,
+    MatGridListModule,
     RouterModule.forRoot(routes),
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   providers: [SharedService,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),

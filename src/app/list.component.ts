@@ -69,7 +69,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.refreshLists();
-
+  
     // Detect if we are on the detail view
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -77,4 +77,5 @@ export class ListComponent implements OnInit {
       }
     });
   }
+  
 }
